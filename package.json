@@ -1,0 +1,187 @@
+{
+  "name": "wallaby-1893",
+  "version": "9.3.0",
+  "description": "MOTOR-TALK discussion forum",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm-run-all --parallel build:client build:server",
+    "build:client": "NODE_ENV=production ./scripts/build.js client",
+    "build:client:stats": "NODE_ENV=production ./scripts/build.js client --stats > client-stats.json",
+    "build:debug": "NODE_ENV=development ./scripts/build.js all",
+    "build:server": "SERVER_ENV=server NODE_ENV=production ./scripts/build.js server",
+    "clean": "scripty",
+    "prepare-deployment": "scripty",
+    "prettier": "scripty",
+    "dev": "NODE_ENV=development npm-run-all --parallel dev:*",
+    "dev:client": "NODE_ENV=development scripty",
+    "dev:server": "NODE_ENV=development scripty",
+    "lint": "NODE_ENV=test scripty",
+    "lint:css": "NODE_ENV=test scripty",
+    "lint:js": "NODE_ENV=test scripty",
+    "start": "NODE_ENV=production node dist/polly-server.js",
+    "test": "NODE_ENV=test scripty",
+    "unit-tests": "NODE_ENV=test scripty",
+    "watch-unit-tests": "NODE_ENV=test scripty",
+    "check-for-missing-tests": "scripty"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.css": [
+      "prettier --write",
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "quokka": {
+    "babel": {
+      "polyfill": true
+    }
+  },
+  "scripty": {
+    "silent": true
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/scripts/utils/setup-jest.js",
+    "moduleDirectories": [
+      "node_modules",
+      "./"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css)$": "identity-obj-proxy"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@mt-.+|@polly-bricks)/)"
+    ],
+    "testResultsProcessor": "<rootDir>/scripts/utils/testResultsProcessor.js",
+    "testMatch": [
+      "**/?(*.)test.js"
+    ],
+    "testEnvironmentOptions": {
+      "url": "http://www.motor-talk.de/foo?bar=baz"
+    }
+  },
+  "jest-html-reporter": {
+    "pageTitle": "Polly Jest Unit Tests",
+    "outputPath": "reports/jest/index.html",
+    "includeFailureMsg": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.corp.ebay.com/motor-talk/polly.git"
+  },
+  "author": "Patrick Hund",
+  "license": "WTFPL",
+  "devDependencies": {
+    "babel-cli": "~6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "~23.0.1",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-builtin-extend": "~1.1.2",
+    "babel-plugin-transform-imports": "^1.5.0",
+    "babel-plugin-transform-inline-imports-commonjs": "^1.2.0",
+    "babel-plugin-transform-object-rest-spread": "~6.26.0",
+    "babel-plugin-transform-react-jsx-source": "~6.22.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
+    "babel-preset-env": "~1.6.1",
+    "babel-preset-fbjs": "^2.1.4",
+    "babel-preset-react": "~6.24.1",
+    "chai": "~4.2.0",
+    "chai-as-promised": "~7.1.1",
+    "chai-enzyme": "^1.0.0-beta.1",
+    "chai-string": "~1.5.0",
+    "chalk": "^2.3.2",
+    "css-loader": "^0.28.11",
+    "css-modules-require-hook": "~4.2.3",
+    "enzyme": "~3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "eslint": "~4.19.0",
+    "eslint-config-motor-talk": "~5.0.0",
+    "eslint-config-prettier": "~2.9.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-prettier": "~2.6.0",
+    "eslint-plugin-react": "~7.7.0",
+    "file-loader": "^1.1.11",
+    "find-root": "^1.1.0",
+    "husky": "~0.14.3",
+    "identity-obj-proxy": "~3.0.0",
+    "jest": "^22.4.2",
+    "jest-html-reporter": "~2.0.0",
+    "jest-junit": "~3.6.0",
+    "lint-staged": "^7.0.0",
+    "lodash.merge": "^4.6.1",
+    "mini-css-extract-plugin": "^0.4.0",
+    "npm-run-all": "~4.1.2",
+    "path-is-inside": "^1.0.2",
+    "postcss": "^6.0.20",
+    "postcss-cssnext": "~3.1.0",
+    "postcss-import": "~11.1.0",
+    "postcss-loader": "^2.1.3",
+    "postcss-nested": "~3.0.0",
+    "prettier": "~1.11.1",
+    "pretty-data": "~0.40.0",
+    "prop-types": "~15.6.1",
+    "react-test-renderer": "~16.3.0",
+    "request": "~2.85.0",
+    "scripty": "~1.7.2",
+    "sinon": "~4.4.6",
+    "sinon-chai": "~3.0.0",
+    "source-map-support": "~0.5.4",
+    "style-loader": "~0.20.3",
+    "stylelint": "~9.1.3",
+    "stylelint-config-motor-talk": "^1.0.3",
+    "supertest": "~3.0.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.4.1",
+    "webpack-merge": "^4.1.2",
+    "webpack-node-externals": "~1.6.0",
+    "webpack-serve": "^0.3.1",
+    "webpack-sources": "^1.1.0",
+    "xmldom": "~0.1.27",
+    "yargs": "^11.0.0"
+  },
+  "dependencies": {
+    "CBuffer": "~2.0.0",
+    "axios": "~0.18.0",
+    "babel-polyfill": "~6.26.0",
+    "bunyan": "~1.8.12",
+    "cheerio": "~0.22.0",
+    "circuit-breaker-js": "0.0.1",
+    "classnames": "~2.2.5",
+    "consent-string": "^1.2.4",
+    "cookie-parser": "~1.4.3",
+    "express": "~4.16.3",
+    "history": "~4.7.2",
+    "isomorphic-fetch": "~2.2.1",
+    "loadable-components": "~1.1.1",
+    "lodash.debounce": "~4.0.8",
+    "lodash.throttle": "~4.1.1",
+    "properties-reader": "0.0.15",
+    "query-string": "~5.0.1",
+    "react": "~16.3.0",
+    "react-dom": "~16.3.0",
+    "react-helmet": "~5.2.0",
+    "react-prebid": "~1.0.7",
+    "react-redux": "~5.0.7",
+    "react-router-dom": "~4.2.2",
+    "react-router-redux": "~5.0.0-alpha.6",
+    "react-swipeable": "~4.2.0",
+    "recompose": "~0.26.0",
+    "redux": "~3.7.2",
+    "redux-saga": "~0.15.6",
+    "reselect": "~3.0.1",
+    "toobusy-js": "~0.5.1",
+    "universal-cookie": "^2.2.0",
+    "url-parse": "~1.3.0",
+    "uuid": "~3.2.1"
+  }
+}
